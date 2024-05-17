@@ -8,8 +8,8 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/gmail.compose"]
 
-# Gets the user's Gmail credentials
 def get_creds(token_path, creds_path):
+	"""Gets the user's Gmail credentials"""
 	creds = None
 	# The file token.json stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
 	if os.path.exists(token_path):
@@ -34,8 +34,8 @@ def get_creds(token_path, creds_path):
 
 	return creds
 
-# Creates an email draft with the provided body
 def create_draft(creds, body):
+	"""Creates an email draft with the provided body"""
 	try:
 		# Create Gmail API client
 		service = build("gmail", "v1", credentials=creds)

@@ -1,8 +1,8 @@
 import base64
 from email.message import EmailMessage
 
-# Generates an E-mail with the provided company name and attachments
 def create_email_body(company, attachments):
+	"""Generates an E-mail with the provided company name and attachments"""
 	mime_message = EmailMessage()
 
 	# headers
