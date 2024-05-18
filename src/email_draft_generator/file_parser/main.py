@@ -25,7 +25,7 @@ def main():
 			for i in range(0, len(lines), 2):
 				companies.append({
 					'name': lines[i].strip(),
-						'email': lines[i+1].strip()
+					'email': lines[i+1].strip()
 				})
 	except:
 		raise ValueError("Invalid input file")
