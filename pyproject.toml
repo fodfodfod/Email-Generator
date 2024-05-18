@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "email_generator"
+name = "email_draft_generator"
 version = "0.0.1"
 description = "A utility to generate E-mail drafts from a list of E-mail addresses."
 readme = "README.md"
@@ -48,5 +48,5 @@ dependencies = [
 "Source" = "https://github.com/fodfodfod/Email-Generator"
 
 [project.scripts]
-email-generator = "email_generator.main:main"
-email-list-parser = "email_generator.file_parser.main:main"
+email-generator = "email_draft_generator.main:main"
+email-list-parser = "email_draft_generator.file_parser.main:main"
