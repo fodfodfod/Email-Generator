@@ -1,25 +1,19 @@
 import base64
 from email.message import EmailMessage
 
-def create_email_body(company, attachments):
-	"""Generates an E-mail with the provided company name and attachments"""
+def create_email_body(template, company, attachments):
+	"""Generates an E-mail with the provided template, company data, and attachments"""
 	mime_message = EmailMessage()
 
-	# headers
-	# TODO: Pull these from a configuration file
+	# Add headers
 	mime_message["To"] = company['email']
 	# Doesn't seem to be required for Gmail
 	# mime_message["From"] = ""
-	mime_message["Subject"] = "sample with attachment"
+	if 'subject' in template:
+		mime_message["Subject"] = str(template['subject']).format_map(company)
 
-	# text
-	mime_message.set_content(f"""Dear {company['name']},
-
-We are pleased to inform you that your company has been selected for a special offer.
-Please find attached the details of the offer.
-
-Best regards,
-Your Company""")
+	# Add text
+	mime_message.set_content(str(template['body']).format_map(company))
 
 	# Add attachments
 	for attachment in attachments:
