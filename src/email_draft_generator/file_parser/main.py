@@ -1,32 +1,21 @@
 import sys
-import fileinput
+import argparse
 import json
-import concurrent.futures
+import email_draft_generator.file_parser.text_parser as text_parser
 
 def main():
-	"""Takes a text file and converts it to a JSON file that can be read by the program
-	File format is a newline-seperated list of company names and e-mail adresses like this:
-	```
-	Company Name 1
-	e-mail@company1.com
-	Company Name 2
-	e-mail@company2.com
-	Company Name 3
-	e-mail@company3.com
-	```
-	"""
+	# Command-line arguments
+	parser = argparse.ArgumentParser(
+		prog='email-list-parser',
+		description='Takes a list of E-mail addresses and turns it into a JSON file.'
+	)
+
+	parser.add_argument('infile', type=argparse.FileType('r'), help='the list of e-mail addresses to parse')
+
+	args = parser.parse_args()
+
 	try:
-		chars = []
-		for char in fileinput.input():
-			chars.append(char)
-		lines = ''.join(chars).split('\n')
-		companies = []
-		with concurrent.futures.ProcessPoolExecutor() as executor:
-			for i in range(0, len(lines), 2):
-				companies.append({
-					'name': lines[i].strip(),
-					'email': lines[i+1].strip()
-				})
+		companies = text_parser.parse(args.infile.readlines())
 	except:
 		raise ValueError("Invalid input file")
 
