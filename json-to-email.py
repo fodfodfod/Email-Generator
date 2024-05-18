@@ -5,14 +5,10 @@ with open('companies.json') as f:
     companies = json.load(f)
 
 # Define your email template
-email_template = """Dear {company_name},
-
-We are pleased to inform you that your company has been selected for a special offer. 
-Please find attached the details of the offer.
-
-Best regards,
-Your Company"""
-email_name=urllib.parse.quote("Give us money please!!!!")
+with open("template.txt") as f:
+    email_template = f.read()
+with open("subject.txt") as f:
+    email_name=urllib.parse.quote(f.read())
 
 # Generate emails for each company
 for company in companies:

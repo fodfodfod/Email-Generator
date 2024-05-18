@@ -1,0 +1,8 @@
+Dear {company_name},
+
+We are pleased to inform you that your company has been selected for a special offer. 
+Please find attached the details of the offer.
+
+Best regards,
+Your Company
+

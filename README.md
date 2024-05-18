@@ -11,6 +11,12 @@ Go to [zip](https://github.com/roboblazers7617/2024Robot/archive/refs/heads/main
 - save it
 - double click `run.sh`
 
+## Modify Email Template
+
+- change the body in `template.txt`
+- change the subject in `subject.txt`
+- make sure to save the files
+
 ## Errors
 
 tell me
