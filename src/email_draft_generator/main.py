@@ -1,32 +1,36 @@
-import os
 import json
 import concurrent.futures
-import fileinput
+import argparse
 
 import email_draft_generator.gmail
 import email_draft_generator.mail_util
 import email_draft_generator.email_creator
 
 def main():
+	# Command-line arguments
+	parser = argparse.ArgumentParser(
+		prog='email-generator',
+		description='Generates E-mail drafts from a list of E-mail addresses and uploads them to Gmail.'
+	)
+
+	parser.add_argument('-t', '--template', type=argparse.FileType('r'), help='the template file to use')
+	parser.add_argument('infile', type=argparse.FileType('r'), help='the list of e-mail addresses to parse')
+
+	args = parser.parse_args()
+
 	# File paths
-	# TODO: Move these to global paths
+	# TODO: Use a keyring for these
 	google_token_path = ".credentials/token.json"
 	google_oauth_credentials_path = ".credentials/credentials.json"
 
 	# Load the companies from the JSON file
 	print("Processing input data")
-	json_data = ""
-	for line in fileinput.input():
-		json_data += line
-	companies = json.loads(json_data)
+	companies = json.load(args.infile)
 
 	# Load the template, or use the default if none is provided
-	# TODO: Create a command line argument for the template path
-	template_path = "data/template.json"
-	if os.path.exists(template_path):
-		with open(template_path) as f:
-			template = json.load(f)
-			print("Template loaded from file")
+	if args.template:
+		template = json.load(args.template)
+		print("Template loaded from file")
 	else:
 		template = {
 			'subject': "Test E-mail",
