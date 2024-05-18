@@ -1,3 +1,5 @@
+import os
+
 import json
 import concurrent.futures
 import argparse
@@ -18,10 +20,10 @@ def main():
 
 	args = parser.parse_args()
 
-	# File paths
 	# TODO: Use a keyring for these
-	google_token_path = ".credentials/token.json"
-	google_oauth_credentials_path = ".credentials/credentials.json"
+	global_creds_dir = os.path.expanduser("~/.local/share/email-generator/credentials")
+	global_token_path = f"{global_creds_dir}/token.json"
+	global_creds_path = f"{global_creds_dir}/credentials.json"
 
 	# Load the companies from the JSON file
 	print("Processing input data")
@@ -43,7 +45,7 @@ company.email: {email}""",
 
 	# Authenticate with Google
 	print("Authenticating")
-	creds = email_draft_generator.gmail.get_creds(google_token_path, google_oauth_credentials_path)
+	creds = email_draft_generator.gmail.get_creds(global_token_path, global_creds_path)
 
 	# Build all of the attachments
 	attachments = []

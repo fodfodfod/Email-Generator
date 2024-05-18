@@ -1,4 +1,4 @@
-import email_draft_generator.main
+from email_draft_generator import main
 
 if __name__ == "__main__":
-	email_draft_generator.main.main()
+	main.main()
