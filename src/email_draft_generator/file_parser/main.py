@@ -1,7 +1,8 @@
 import sys
 import argparse
 import json
-import email_draft_generator.file_parser.text_parser as text_parser
+from email_draft_generator.file_parser import text_parser
+from email_draft_generator.file_parser import csv_parser
 
 def main():
 	# Command-line arguments
@@ -10,12 +11,16 @@ def main():
 		description='Takes a list of E-mail addresses and turns it into a JSON file.'
 	)
 
+	parser.add_argument('--format', choices=['text', 'csv'], default='text', help='the format of the input file (default: text)')
 	parser.add_argument('infile', type=argparse.FileType('r'), help='the list of e-mail addresses to parse')
 
 	args = parser.parse_args()
 
 	try:
-		companies = text_parser.parse(args.infile.readlines())
+		if args.format == 'text':
+			companies = text_parser.parse(args.infile.readlines())
+		elif args.format == 'csv':
+			companies = csv_parser.parse(args.infile)
 	except:
 		raise ValueError("Invalid input file")
 
