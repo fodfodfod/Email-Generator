@@ -1,6 +1,6 @@
 # Email Generator
 
-if attachments are nescesary, use [this one](https://github.com/CoffeeCoder1/Email-Generator) by [@CoffeeCoder1](https://github.com/CoffeeCoder1) that uses the Gmail API.
+_If attachments are nescesary, use [this one](https://github.com/CoffeeCoder1/Email-Generator) by [@CoffeeCoder1](https://github.com/CoffeeCoder1) that uses the Gmail API._
 
 ## Installation
 
