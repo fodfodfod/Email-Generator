@@ -1,5 +1,7 @@
 # Email Generator
 
+if attachments are nescesary, use [this one](https://github.com/CoffeeCoder1/Email-Generator) by [@CoffeeCoder1](https://github.com/CoffeeCoder1) that uses the Gmail API.
+
 ## Installation
 
 Go to [zip](https://github.com/roboblazers7617/2024Robot/archive/refs/heads/main.zip). Or go to Code > download zip
