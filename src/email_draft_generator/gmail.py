@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -23,11 +24,24 @@ def get_creds(token_path, creds_path):
 		else:
 			# If OAuth2 creds do not exist, tell the user to create them
 			if not os.path.exists(creds_path):
-				raise FileNotFoundError(f"No OAuth2 Credentials exist! Follow the guide at https://developers.google.com/gmail/api/quickstart/python#set_up_your_environment to create them, and, when you are at the step to configure the OAuth consent screen, add the `gmail.compose` scope. Download them into `.credentials/credentials.json`, and re-launch the program.")
-			# If they do, create an OAuth flow
+				creds_path_input = input("No OAuth2 Credentials exist!\nFollow the guide at https://developers.google.com/gmail/api/quickstart/python#set_up_your_environment to create them, and, when you are at the step to configure the OAuth consent screen, add the `gmail.compose` scope.\nDownload them to your device, copy the file path, and enter it here: ")
+
+				input_path = Path(creds_path_input)
+				with open(input_path, "r") as creds_input:
+					oauth_creds = creds_input.read()
+
+				flow = InstalledAppFlow.from_client_secrets_file(creds_path_input, SCOPES)
+
+				output_path = Path(creds_path)
+				output_path.parent.mkdir(parents=True, exist_ok=True)
+				with open(creds_path, "w") as creds_output:
+					creds_output.write(oauth_creds)
+
+				input_path.unlink(missing_ok=True)
 			else:
+				# If they do, create an OAuth flow
 				flow = InstalledAppFlow.from_client_secrets_file(creds_path, SCOPES)
-				creds = flow.run_local_server(port=0)
+			creds = flow.run_local_server(port=0)
 		# Save the credentials for the next run
 		with open(token_path, "w") as token:
 			token.write(creds.to_json())
