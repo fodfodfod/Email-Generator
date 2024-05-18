@@ -1,3 +1,4 @@
+# Builds the package, and, if the commit has a tag assigned to it, create a release for it and publish it to PyPI
 name: Build CI/CD
 
 on:
@@ -6,7 +7,6 @@ on:
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -29,3 +29,9 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: dist/*
+    - name: Publish package
+      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
