@@ -1,5 +1,6 @@
 import json
 import urllib.parse
+import webbrowser
 # Load the companies from the JSON file
 with open('companies.json') as f:
     companies = json.load(f)
@@ -16,5 +17,6 @@ for company in companies:
     email_link = "mailto:" + f"{company['email']}?subject={email_name}&body={email}"
     # print(f"<a href=\"{email_link}\"> text</a>")
     print(email_link)
+    webbrowser.open(email_link)
     
 
