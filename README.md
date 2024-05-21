@@ -12,6 +12,7 @@ Go to [zip](https://github.com/roboblazers7617/2024Robot/archive/refs/heads/main
 - make sure there is nothing else in the file
 - save it
 - double click `run.sh`
+- all links will be opened in the default browser
 
 ## Modify Email Template
 
