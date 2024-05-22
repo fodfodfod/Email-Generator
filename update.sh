@@ -1,4 +1,6 @@
 
+cd $(dirname "$0")
+
 # Define the GitHub repository and branch
 REPO="fodfodfod/Email-Generator"
 BRANCH="main"
